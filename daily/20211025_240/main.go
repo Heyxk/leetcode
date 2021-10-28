@@ -1,48 +1,47 @@
 package main
 
 func searchMatrix(matrix [][]int, target int) bool {
-	// 二分法
-	// 二分查找x轴, 淘汰掉大于target的
-
-	yright := len(matrix) - 1
-	if yright < 0 {
-		return false
-	}
+	yright := len(matrix)
 	yleft := 0
-	for yleft < yright-1 {
-		cur := (yleft + yright) / 2 // 游标
+LABLE0:
+	for cus := (yleft + yright) / 2; yleft < yright; cus = (yleft + yright) / 2 {
+		if len(matrix[cus]) == 0 {
+			break LABLE0
+		}
 		switch {
-		case matrix[cur][0] > target: // 游标值大于tatget right左移动
-			yright = cur
+		case matrix[cus][0] > target: // 游标值大于tatget right左移动
+			if yright == cus {
+				break LABLE0
+			}
+			yright = cus
 
-		case matrix[cur][0] < target:
-			yleft = cur
-		case matrix[cur][0] == target:
+		case matrix[cus][0] < target:
+			if yleft == cus {
+				break LABLE0
+			}
+			yleft = cus
+		case matrix[cus][0] == target:
 			return true
 		}
 	}
-	for i := 0; i < yright+1; i++ {
+
+	for i := 0; i < yright; i++ {
 		xleft := 0
-		xright := len(matrix[i]) - 1
-
-		if xleft == xright {
-			if matrix[i][0] == target {
-				return true
-			}
-		}
-
-		if matrix[i][xright] == target || matrix[i][xleft] == target {
-			return true
-		}
-
-		for xleft < xright-1 {
-			cur := (xleft + xright) / 2 // 游标
+		xright := len(matrix[i])
+	LABLE1:
+		for cus := (xleft + xright) / 2; xleft < xright; cus = (xleft + xright) / 2 {
 			switch {
-			case matrix[i][cur] > target: // 游标值大于tatget right左移动
-				xright = cur
-			case matrix[i][cur] < target:
-				xleft = cur
-			case matrix[i][cur] == target:
+			case matrix[i][cus] > target: // 游标值大于tatget right左移动
+				if xright == cus {
+					break LABLE1
+				}
+				xright = cus
+			case matrix[i][cus] < target:
+				if xleft == cus {
+					break LABLE1
+				}
+				xleft = cus
+			case matrix[i][cus] == target:
 				return true
 			}
 		}
