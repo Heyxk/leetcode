@@ -1,26 +1,29 @@
 package main
 
 type CQueue struct {
-	stack []int
-	head  int
-	tail  int
+	inStack, outStack []int
 }
 
 func Constructor() CQueue {
-	return CQueue{stack: make([]int, 0, 10), head: 0, tail: 0}
+	return CQueue{}
 }
 
-func (this *CQueue) AppendTail(value int) {
-	this.stack = append(this.stack, value)
-	this.tail++
+func (cq *CQueue) AppendTail(value int) {
+	cq.inStack = append(cq.inStack, value)
 }
 
-func (this *CQueue) DeleteHead() int {
-	if this.head == this.tail {
-		return -1
+func (cq *CQueue) DeleteHead() int {
+	if len(cq.outStack) == 0 {
+		if len(cq.inStack) == 0 {
+			return -1
+		}
+		// cq.outStack = cq.inStack[:] // this will make cq.outStack refrence the same address with cq.inStack 
+		cq.outStack = append(cq.outStack, cq.inStack...)
+		cq.inStack = cq.inStack[:0]
 	}
-	ret := this.stack[this.head]
-	this.head++
+	ret := cq.outStack[0]
+	cq.outStack = cq.outStack[1:]
+
 	return ret
 }
 
@@ -30,7 +33,3 @@ func (this *CQueue) DeleteHead() int {
  * obj.AppendTail(value);
  * param_2 := obj.DeleteHead();
  */
-
-func main() {
-
-}
