@@ -1,46 +1,42 @@
 package main
 
 type MinStack struct {
-	stack   []int
-	top     int
-	minList []int
+	stack []int
+	min   []int
 }
 
 /** initialize your data structure here. */
 func Constructor() MinStack {
-	return MinStack{stack: make([]int, 0, 5), top: 0, minList: make([]int, 0, 5)}
+	return MinStack{stack: make([]int, 0, 10), min: make([]int, 0, 10)}
 }
 
-func (this *MinStack) Push(x int) {
-	if len(this.stack) > this.top {
-		this.stack[this.top] = x
+func (ms *MinStack) Push(x int) {
+	// 维护一个最小值栈 栈顶元素最大
+	if len(ms.min) == 0 || x <= ms.min[len(ms.min)-1] {
+		ms.min = append(ms.min, x)
 	} else {
-		this.stack = append(this.stack, x)
+		ms.min = append(ms.min, ms.min[len(ms.min)-1])
 	}
-	this.top++
-	if len(this.minList) == 0 || x <= this.stack[this.minList[len(this.minList)-1]] {
-		this.minList = append(this.minList, this.top-1)
-	}
+	ms.stack = append(ms.stack, x)
 }
 
-func (this *MinStack) Pop() {
-	// 题目没有说明空栈如何处理
-	if this.top == 0 {
-		return
-	}
-	if this.minList[len(this.minList)-1] == this.top-1 {
-		this.minList = this.minList[:len(this.minList)-1]
-	}
-	this.top--
+func (ms *MinStack) Pop() {
+	ms.min = ms.min[:len(ms.min)-1] // min 弹出一个最小值
+	ms.stack = ms.stack[:len(ms.stack)-1]
 }
 
-func (this *MinStack) Top() int {
-	return this.stack[this.top-1]
-
+func (ms *MinStack) Top() int {
+	if len(ms.stack) > 0 {
+		return ms.stack[len(ms.stack)-1]
+	}
+	panic("ms.stack is empty!")
 }
 
-func (this *MinStack) Min() int {
-	return this.stack[this.minList[len(this.minList)-1]]
+func (ms *MinStack) Min() int {
+	if len(ms.min) > 0 {
+		return ms.min[len(ms.min)-1]
+	}
+	panic("ms.min is empty!")
 }
 
 /**
