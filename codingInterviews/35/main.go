@@ -1,5 +1,11 @@
 package main
 
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
+
 /**
  * Definition for a Node.
  * type Node struct {
@@ -13,33 +19,33 @@ func copyRandomList(head *Node) *Node {
 	if head == nil {
 		return nil
 	}
-	var nodeList, retList []*Node
-	ret := &Node{Val: head.Val, Next: nil, Random: nil}
-	retHead := ret
-	nodeList = append(nodeList, head)
-	retList = append(retList, ret)
-	for h := head.Next; h != nil; h = h.Next {
-		nodeList = append(nodeList, h)
-		tmp := &Node{Val: h.Val, Next: nil, Random: nil}
-		retList = append(retList, tmp)
-		ret.Next = tmp
-		ret = ret.Next
+	input := map[*Node]int{}
+	// output := map[int]*Node{}
+	output := []*Node{}
+
+	retHead := &Node{head.Val, nil, nil}
+	input[head] = 0
+	// output[0] = retHead
+	output = append(output, retHead)
+	for n, inPtr, outPtr := 1, head.Next, retHead; inPtr != nil; n++ {
+		input[inPtr] = n
+		node := &Node{inPtr.Val, nil, nil}
+		// output[n] = node
+		output = append(output, node)
+		outPtr.Next = node
+		outPtr = outPtr.Next
+		inPtr = inPtr.Next
 	}
-	for h, h1 := head, retHead; h != nil; h, h1 = h.Next, h1.Next {
-		if h.Random == nil {
-			continue
+	for outPtr := retHead; outPtr != nil; outPtr = outPtr.Next {
+		if head.Random == nil {
+			outPtr.Random = nil
+
+		} else {
+			v := input[head.Random]
+			outPtr.Random = output[v]
 		}
-		for k, v := range nodeList {
-			if v == h.Random {
-				h1.Random = retList[k]
-			}
-		}
+		head = head.Next
+
 	}
 	return retHead
-}
-
-type Node struct {
-	Val    int
-	Next   *Node
-	Random *Node
 }
