@@ -18,6 +18,7 @@ func Test_replaceSpace(t *testing.T) {
 		{"case4", args{"a"}, "a"},
 		{"case5", args{""}, ""},
 		{"case6", args{" "}, "%20"},
+		{"case7", args{"     "}, "%20%20%20%20%20"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
