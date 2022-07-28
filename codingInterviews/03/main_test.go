@@ -13,7 +13,6 @@ func Test_findRepeatNumber(t *testing.T) {
 	}{
 		// TODO: Add test cases.
 		{"case1", args{[]int{2, 3, 1, 0, 2, 5, 3}}, 2},
-		{"case2", args{[]int{0,1}}, -1},
 		{"case3", args{[]int{1,1}}, 1},
 	}
 	for _, tt := range tests {

@@ -8,5 +8,5 @@ func findRepeatNumber(nums []int) int {
 			return v
 		}
 	}
-	return -1
+	panic("error input!")
 }
