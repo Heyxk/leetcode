@@ -1,12 +1,14 @@
 package main
 
 func minArray(numbers []int) int {
-	for k, v := range numbers {
-		if k-1 >= 0 && v < numbers[k-1] {
+	for i, v := range numbers {
+		if i == 0 {
+			continue
+		}
+		if v < numbers[i-1] {
 			return v
 		}
-
 	}
+	// len(numbers) >= 1
 	return numbers[0]
-
 }
