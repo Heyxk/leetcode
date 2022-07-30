@@ -1,5 +1,11 @@
 package main
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -9,45 +15,31 @@ package main
  * }
  */
 func levelOrder(root *TreeNode) [][]int {
-	var ret [][]int
 
 	if root == nil {
 		return [][]int{}
 	}
+	ret := [][]int{}
+	queue := []*TreeNode{root}
 
-	ret = append(ret, []int{root.Val})
+	for len(queue) > 0 {
+		tmp := []int{}
 
-	next := []*TreeNode{root}
+		for i, l := 0, len(queue); i < l; i++ {
+			node := queue[0]
+			queue = queue[1:] // 队列出一个元素
+			tmp = append(tmp, node.Val)
 
-	for len(next) > 0 {
-		if tmp := que(next); len(tmp) > 0 {
-			ret = append(ret, tmp)
-		}
-		var tmpNext []*TreeNode
-		for _, v := range next {
-			if v.Left != nil {
-				tmpNext = append(tmpNext, v.Left)
+			if node.Left != nil {
+				queue = append(queue, node.Left)
 			}
-			if v.Right != nil {
-				tmpNext = append(tmpNext, v.Right)
+			if node.Right != nil {
+				queue = append(queue, node.Right)
+
 			}
 		}
-		next = tmpNext
+		ret = append(ret, tmp)
 	}
 	return ret
-}
 
-func que(queue []*TreeNode) []int {
-	var ret []int
-	for _, root := range queue {
-		if root.Left != nil {
-			ret = append(ret, root.Left.Val)
-			queue = append(queue, root.Left)
-		}
-		if root.Right != nil {
-			ret = append(ret, root.Right.Val)
-			queue = append(queue, root.Right)
-		}
-	}
-	return ret
 }
