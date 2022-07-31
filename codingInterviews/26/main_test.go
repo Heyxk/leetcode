@@ -64,3 +64,44 @@ func Test_recur(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_isSubStructure(b *testing.B) {
+	type args struct {
+		A *TreeNode
+		B *TreeNode
+	}
+	a := &TreeNode{3, nil, nil}
+	b1 := &TreeNode{4, nil, nil}
+	c := &TreeNode{5, nil, nil}
+	d := &TreeNode{1, nil, nil}
+	e := &TreeNode{2, nil, nil}
+	a.Left = b1
+	a.Right = c
+	b1.Left = d
+	b1.Right = e
+
+	aa := &TreeNode{4, nil, nil}
+	bb := &TreeNode{1, nil, nil}
+	aa.Left = bb
+
+	tests := []struct {
+		name string
+		args args
+		want bool
+	}{
+		// TODO: Add test cases.
+		{"case1", args{a, aa}, true},
+		{"case2", args{nil, aa}, false},
+		{"case3", args{a, nil}, false},
+		{"case4", args{nil, nil}, false},
+		{"case5", args{b1, c}, false},
+		{"case6", args{c, c}, true},
+		{"case7", args{b1, b1}, true},
+	}
+
+	for i := 0; i < b.N; i++ {
+		for _, tt := range tests {
+			isSubStructure(tt.args.A, tt.args.B)
+		}
+	}
+}

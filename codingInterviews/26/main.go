@@ -1,5 +1,11 @@
 package main
 
+type TreeNode struct {
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
+}
+
 /**
  * Definition for a binary tree node.
  * type TreeNode struct {
@@ -9,10 +15,7 @@ package main
  * }
  */
 func isSubStructure(A *TreeNode, B *TreeNode) bool {
-	if A == nil || B == nil {
-		return false
-	}
-	return recur(A, B) || isSubStructure(A.Left, B) || isSubStructure(A.Right, B)
+	return (A != nil && B != nil) && (recur(A, B) || isSubStructure(A.Left, B) || isSubStructure(A.Right, B))
 }
 
 func recur(A *TreeNode, B *TreeNode) bool {
