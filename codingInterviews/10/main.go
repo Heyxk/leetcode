@@ -14,5 +14,4 @@ func fib(n int) int {
 		r = (p + q) % mod
 	}
 	return r
-
 }
