@@ -1,5 +1,10 @@
 package main
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
+
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -8,16 +13,12 @@ package main
  * }
  */
 func getKthFromEnd(head *ListNode, k int) *ListNode {
-	if head == nil {
-		return nil
+	n := 0
+	for p := head; p != nil; p = p.Next {
+		n++
 	}
-
-	var a []*ListNode
-
-	for ptr := head; ptr != nil; ptr = ptr.Next {
-		a = append(a, ptr)
+	for i := 0; i < n-k; i++ {
+		head = head.Next
 	}
-
-	return a[len(a)-k]
-
+	return head
 }
