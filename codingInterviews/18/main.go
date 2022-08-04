@@ -1,5 +1,9 @@
 package main
 
+type ListNode struct {
+	Val  int
+	Next *ListNode
+}
 /**
  * Definition for singly-linked list.
  * type ListNode struct {
@@ -12,8 +16,7 @@ func deleteNode(head *ListNode, val int) *ListNode {
 		return nil
 	}
 	if head.Val == val {
-		head = head.Next
-		return head
+		return head.Next
 	}
 	for ptr := head; ptr.Next != nil; ptr = ptr.Next {
 		if ptr.Next.Val == val {
@@ -24,5 +27,4 @@ func deleteNode(head *ListNode, val int) *ListNode {
 		}
 	}
 	return head
-
 }
