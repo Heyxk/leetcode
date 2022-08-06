@@ -5,11 +5,10 @@ func exchange(nums []int) []int {
 	if length < 2 {
 		return nums
 	}
-	for i := 0; i < length; i++ {
+	for i := 1; i < length; i++ {
 		if nums[i]%2 != 0 {
-			tmp := nums[i]
-			nums = append(nums[:i], nums[i+1:]...)
-			nums = append([]int{tmp}, nums...)
+			nums = append([]int{nums[i]}, nums...)
+			nums = append(nums[:i+1], nums[i+2:]...)
 		}
 	}
 	return nums
