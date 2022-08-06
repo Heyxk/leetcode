@@ -1,5 +1,6 @@
 package main
 
+// 对撞双指针
 func twoSum(nums []int, target int) []int {
 	j := len(nums) - 1
 
@@ -13,5 +14,4 @@ func twoSum(nums []int, target int) []int {
 		}
 	}
 	return []int{}
-
 }
