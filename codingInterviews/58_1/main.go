@@ -1,26 +1,28 @@
 package main
 
-import "strings"
+import (
+	"strings"
+)
 
 func reverseWords(s string) string {
-	if len(s) == 0{
-		return ""
+	if len(s) == 0 {
+		return s
 	}
-	s1 := strings.Split(s, " ")
-	for i, j := 0, len(s1)-1; i < j; i, j = i+1, j-1 {
-		s1[i], s1[j] = s1[j], s1[i]
-	}
-	ret := ""
-	for i, j := 0, len(s1); i < j; i++ {
-		if s1[i] == "" {
+	tmp := strings.Split(s, " ")
+	for i := 0; i < len(tmp)/2; {
+		if tmp[i] == "" {
+			tmp = append(tmp[:i], tmp[i+1:]...)
 			continue
 		}
-		ret += s1[i]
-		ret += " "
+		if tmp[len(tmp)-1-i] == "" {
+			tmp = append(tmp[:len(tmp)-1-i], tmp[len(tmp)-i:]...)
+			continue
+		}
+		tmp[i], tmp[len(tmp)-1-i] = tmp[len(tmp)-1-i], tmp[i]
+		i++
 	}
-	if len(ret) > 0 {
-		return ret[:len(ret)-1]
-	} else {
-		return ret
+	if tmp[len(tmp)/2] == "" {
+		tmp = append(tmp[:len(tmp)/2], tmp[len(tmp)/2+1:]...)
 	}
+	return strings.Join(tmp, " ")
 }
