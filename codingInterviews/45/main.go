@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"strconv"
 )
 
 func minNumber(nums []int) string {
-	bubbleSort(nums)
+	quickSort(nums, 0, len(nums)-1)
 	ret := ""
 	for _, v := range nums {
 		ret = fmt.Sprintf("%s%d", ret, v)
@@ -15,39 +14,22 @@ func minNumber(nums []int) string {
 	return ret
 }
 
-func bubbleSort(a []int) {
-	length := len(a)
-	for i := 0; i < length; i++ {
-		for j := i; j < length; j++ {
-			b := fmt.Sprintf("%d%d", a[i], a[j])
-			c := fmt.Sprintf("%d%d", a[j], a[i])
-			d, _ := strconv.Atoi(b)
-			e, _ := strconv.Atoi(c)
-			if d > e {
-				a[i], a[j] = a[j], a[i]
-			}
-		}
-	}
-}
-
-func partition(a []int, lo, hi int) int {
-	pivot := a[hi]
-	i := lo - 1
-	for j := lo; j < hi; j++ {
-		if a[j] < pivot {
-			i++
-			a[j], a[i] = a[i], a[j]
-		}
-	}
-	a[i+1], a[hi] = a[hi], a[i+1]
-	return i + 1
-}
-
-func quickSort(a []int, lo, hi int) {
-	if lo >= hi {
+func quickSort(a []int, l int, r int) {
+	if l >= r {
 		return
 	}
-	p := partition(a, lo, hi)
-	quickSort(a, lo, p-1)
-	quickSort(a, p+1, hi)
+	i, j := l, r
+	for i < j {
+
+		for fmt.Sprintf("%d%d", a[j], a[l]) >= fmt.Sprintf("%d%d", a[l], a[j]) && i < j {
+			j--
+		}
+		for fmt.Sprintf("%d%d", a[i], a[l]) <= fmt.Sprintf("%d%d", a[l], a[i]) && i < j {
+			i++
+		}
+		a[i], a[j] = a[j], a[i]
+	}
+	a[i], a[l] = a[l], a[i]
+	quickSort(a, l, i-1)
+	quickSort(a, i+1, r)
 }
