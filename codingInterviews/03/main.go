@@ -1,12 +1,15 @@
 package main
 
 func findRepeatNumber(nums []int) int {
-	m := make(map[int]int)
-	for _, v := range nums {
-		m[v]++
-		if m[v] > 1 {
-			return v
+	for i, l := 0, len(nums); i < l; {
+		if nums[i] == i {
+			i++
+			continue
+		} else if nums[i] == nums[nums[i]] {
+			return nums[i]
+		} else {
+			nums[nums[i]], nums[i] = nums[i], nums[nums[i]]
 		}
 	}
-	panic("error input!")
+	panic("error input")
 }
