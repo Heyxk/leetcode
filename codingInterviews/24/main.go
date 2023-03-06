@@ -15,12 +15,11 @@ type ListNode struct {
 
 func reverseList(head *ListNode) *ListNode {
 	var prev *ListNode
-	curr := head
-	for curr != nil {
-		next := curr.Next
-		curr.Next = prev
-		prev = curr
-		curr = next
+	for head != nil {
+		next := head.Next
+		head.Next = prev
+		prev = head
+		head = next
 	}
 	return prev
 }
