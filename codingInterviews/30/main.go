@@ -11,32 +11,27 @@ func Constructor() MinStack {
 }
 
 func (ms *MinStack) Push(x int) {
-	// 维护一个最小值栈 栈顶元素最大
-	if len(ms.min) == 0 || x <= ms.min[len(ms.min)-1] {
-		ms.min = append(ms.min, x)
-	} else {
-		ms.min = append(ms.min, ms.min[len(ms.min)-1])
-	}
 	ms.stack = append(ms.stack, x)
+	if len(ms.min) == 0 || x <= ms.min[0] {
+		ms.min = append([]int{x}, ms.min...)
+	}
 }
 
 func (ms *MinStack) Pop() {
-	ms.min = ms.min[:len(ms.min)-1] // min 弹出一个最小值
+	x := ms.stack[len(ms.stack)-1]
 	ms.stack = ms.stack[:len(ms.stack)-1]
+	if x == ms.min[0] {
+		ms.min = ms.min[1:]
+	}
+
 }
 
 func (ms *MinStack) Top() int {
-	if len(ms.stack) > 0 {
-		return ms.stack[len(ms.stack)-1]
-	}
-	panic("ms.stack is empty!")
+	return ms.stack[len(ms.stack)-1]
 }
 
 func (ms *MinStack) Min() int {
-	if len(ms.min) > 0 {
-		return ms.min[len(ms.min)-1]
-	}
-	panic("ms.min is empty!")
+	return ms.min[0]
 }
 
 /**
