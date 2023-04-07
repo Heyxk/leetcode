@@ -17,8 +17,9 @@ func (cq *CQueue) DeleteHead() int {
 		if len(cq.inStack) == 0 {
 			return -1
 		}
-		// cq.outStack = cq.inStack[:] // this will make cq.outStack refrence the same address with cq.inStack 
+		// cq.outStack = cq.inStack[:] // this will make cq.outStack reference the same address with cq.inStack
 		cq.outStack = append(cq.outStack, cq.inStack...)
+		// copy(cq.outStack, cq.inStack) // 使用copy, 如果instack比outstack大, 那么元素不能复制完
 		cq.inStack = cq.inStack[:0]
 	}
 	ret := cq.outStack[0]
