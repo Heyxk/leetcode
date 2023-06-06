@@ -1,0 +1,13 @@
+target_case: 0
+
+input:
+["CQueue","appendTail","deleteHead","deleteHead","deleteHead"]
+[[],[3],[],[],[]]
+output:
+[null,null,3,-1,-1]
+
+input:
+["CQueue","deleteHead","appendTail","appendTail","deleteHead","deleteHead"]
+[[],[],[5],[2],[],[]]
+output:
+[null,-1,null,null,5,2]
