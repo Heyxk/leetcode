@@ -1,0 +1,6 @@
+target_case: 0
+
+input:
+[7,1,5,3,6,4]
+output:
+5
