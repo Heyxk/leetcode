@@ -28,3 +28,28 @@ func Test_replaceSpace(t *testing.T) {
 		})
 	}
 }
+
+func Benchmark_replaceSpace(b *testing.B) {
+	type args struct {
+		s string
+	}
+	tests := []struct {
+		name string
+		args args
+		want string
+	}{
+		// TODO: Add test cases.
+		{"case1", args{"We are happy."}, "We%20are%20happy."},
+		{"case2", args{"你 好"}, "你%20好"},
+		{"case3", args{"你"}, "你"},
+		{"case4", args{"a"}, "a"},
+		{"case5", args{""}, ""},
+		{"case6", args{" "}, "%20"},
+		{"case7", args{"     "}, "%20%20%20%20%20"},
+	}
+	for i := 0; i < b.N; i++ {
+		for _, tt := range tests {
+			replaceSpace(tt.args.s)
+		}
+	}
+}

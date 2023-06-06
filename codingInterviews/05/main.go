@@ -1,13 +1,13 @@
 package main
 
 func replaceSpace(s string) string {
-	ret := []rune{}
+	sRune := make([]rune, 0, len(s))
 	for _, v := range s {
 		if v == 32 {
-			ret = append(ret, []rune("%20")...)
+			sRune = append(sRune, []rune("%20")...)
 		} else {
-			ret = append(ret, v)
+			sRune = append(sRune, v)
 		}
 	}
-	return string(ret)
+	return string(sRune)
 }
