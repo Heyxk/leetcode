@@ -1,4 +1,4 @@
-// Created by k at 2023/06/05 10:59
+// Created by k at 2023/06/08 17:16
 // https://leetcode.cn/problems/er-wei-shu-zu-zhong-de-cha-zhao-lcof/
 
 package main
@@ -14,14 +14,14 @@ import (
 // @lc code=begin
 
 func findNumberIn2DArray(matrix [][]int, target int) bool {
-	i, j := len(matrix)-1, 0
-	for i >= 0 && j < len(matrix[0]) {
-		if matrix[i][j] > target {
-			i--
-		} else if matrix[i][j] < target {
-			j++
-		} else {
+	m, n := len(matrix)-1, 0
+	for m >= 0 && n < len(matrix[0]) {
+		if matrix[m][n] == target {
 			return true
+		} else if matrix[m][n] > target {
+			m--
+		} else {
+			n++
 		}
 	}
 	return false
@@ -34,5 +34,6 @@ func main() {
 	matrix := Deserialize[[][]int](ReadLine(stdin))
 	target := Deserialize[int](ReadLine(stdin))
 	ans := findNumberIn2DArray(matrix, target)
-	fmt.Println("output: " + Serialize(ans))
+
+	fmt.Println("\noutput:", Serialize(ans))
 }
