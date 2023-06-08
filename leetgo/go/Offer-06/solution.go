@@ -1,4 +1,4 @@
-// Created by k at 2023/05/09 08:47
+// Created by k at 2023/06/08 11:29
 // https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/
 
 package main
@@ -14,11 +14,9 @@ import (
 // @lc code=begin
 
 func reversePrint(head *ListNode) (ans []int) {
-	for head != nil {
+	for ; head != nil; head = head.Next {
 		ans = append([]int{head.Val}, ans...)
-		head = head.Next
 	}
-
 	return
 }
 
@@ -28,5 +26,6 @@ func main() {
 	stdin := bufio.NewReader(os.Stdin)
 	head := Deserialize[*ListNode](ReadLine(stdin))
 	ans := reversePrint(head)
-	fmt.Println("output: " + Serialize(ans))
+
+	fmt.Println("\noutput:", Serialize(ans))
 }
