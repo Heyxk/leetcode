@@ -1,4 +1,4 @@
-// Created by k at 2023/05/08 08:46
+// Created by k at 2023/06/08 10:20
 // https://leetcode.cn/problems/bao-han-minhan-shu-de-zhan-lcof/
 
 package main
@@ -26,21 +26,28 @@ func Constructor() MinStack {
 
 func (m *MinStack) Push(x int) {
 	m.stack = append(m.stack, x)
-	if len(m.minStack) == 0 || x <= m.minStack[len(m.minStack)-1] {
+	if len(m.minStack) == 0 || m.minStack[len(m.minStack)-1] >= x {
 		m.minStack = append(m.minStack, x)
 	}
 
 }
 
 func (m *MinStack) Pop() {
-	if m.minStack[len(m.minStack)-1] == m.stack[len(m.stack)-1] {
+	if len(m.stack) == 0 {
+		return
+	}
+	top := m.stack[len(m.stack)-1]
+	m.stack = m.stack[:len(m.stack)-1]
+	if m.minStack[len(m.minStack)-1] == top {
 		m.minStack = m.minStack[:len(m.minStack)-1]
 	}
-	m.stack = m.stack[:len(m.stack)-1]
+
 }
 
 func (m *MinStack) Top() (ans int) {
-	ans = m.stack[len(m.stack)-1]
+	if len(m.stack) != 0 {
+		ans = m.stack[len(m.stack)-1]
+	}
 	return
 }
 
@@ -58,9 +65,9 @@ func main() {
 	output := make([]string, 0, len(ops))
 	output = append(output, "null")
 
-	// constructorParams := MustSplitArray(params[0])
-	// maxSize := Deserialize[int](constructorParams[0])
-	obj := Constructor()
+	constructorParams := MustSplitArray(params[0])
+	maxSize := Deserialize[int](constructorParams[0])
+	obj := Constructor(maxSize)
 
 	for i := 1; i < len(ops); i++ {
 		switch ops[i] {
@@ -80,5 +87,5 @@ func main() {
 			output = append(output, ans)
 		}
 	}
-	fmt.Println("output: ", JoinArray(output))
+	fmt.Println("\noutput:", JoinArray(output))
 }
