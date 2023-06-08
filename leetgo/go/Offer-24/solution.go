@@ -1,4 +1,4 @@
-// Created by k at 2023/05/12 06:53
+// Created by k at 2023/06/08 12:14
 // https://leetcode.cn/problems/fan-zhuan-lian-biao-lcof/
 
 package main
@@ -15,14 +15,13 @@ import (
 
 func reverseList(head *ListNode) (ans *ListNode) {
 	var pre *ListNode
-	for head != nil{
+	for head != nil {
 		next := head.Next
 		head.Next = pre
 		pre = head
 		head = next
 	}
-	ans = pre
-	return
+	return pre
 }
 
 // @lc code=end
@@ -31,5 +30,6 @@ func main() {
 	stdin := bufio.NewReader(os.Stdin)
 	head := Deserialize[*ListNode](ReadLine(stdin))
 	ans := reverseList(head)
-	fmt.Println("output: " + Serialize(ans))
+
+	fmt.Println("\noutput:", Serialize(ans))
 }
