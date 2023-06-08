@@ -1,4 +1,4 @@
-// Created by k at 2023/05/29 14:34
+// Created by k at 2023/06/08 14:15
 // https://leetcode.cn/problems/zai-pai-xu-shu-zu-zhong-cha-zhao-shu-zi-lcof/
 
 package main
@@ -14,21 +14,19 @@ import (
 // @lc code=begin
 
 func search(nums []int, target int) (ans int) {
-
-	ans = helper(nums, target) - helper(nums, target-1)
-	return
+	return helper(nums, target) - helper(nums, target-1)
 }
-func helper(nums []int, tar int) int {
-	i, j := 0, len(nums)-1
-	for i <= j {
-		mid := i + (j-i)/2
-		if nums[mid] <= tar {
-			i = mid + 1
+func helper(nums []int, target int) int {
+	l, r := 0, len(nums)-1
+	for l <= r {
+		mid := l + (r-l)/2
+		if nums[mid] <= target {
+			l = mid + 1
 		} else {
-			j = mid - 1
+			r = mid - 1
 		}
 	}
-	return i
+	return l
 }
 
 // @lc code=end
@@ -38,5 +36,6 @@ func main() {
 	nums := Deserialize[[]int](ReadLine(stdin))
 	target := Deserialize[int](ReadLine(stdin))
 	ans := search(nums, target)
-	fmt.Println("output: " + Serialize(ans))
+
+	fmt.Println("\noutput:", Serialize(ans))
 }
