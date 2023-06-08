@@ -1,4 +1,4 @@
-// Created by k at 2023/05/08 05:06
+// Created by k at 2023/06/08 10:13
 // https://leetcode.cn/problems/yong-liang-ge-zhan-shi-xian-dui-lie-lcof/
 
 package main
@@ -14,7 +14,8 @@ import (
 // @lc code=begin
 
 type CQueue struct {
-	in, out []int
+	inStack  []int
+	outStack []int
 }
 
 func Constructor() CQueue {
@@ -23,19 +24,19 @@ func Constructor() CQueue {
 }
 
 func (c *CQueue) AppendTail(value int) {
-	c.in = append(c.in, value)
+	c.inStack = append(c.inStack, value)
 }
 
 func (c *CQueue) DeleteHead() (ans int) {
-	if len(c.out) == 0 {
-		if len(c.in) == 0 {
+	if len(c.outStack) == 0 {
+		if len(c.inStack) == 0 {
 			return -1
 		}
-		c.out = append(c.out, c.in...)
-		c.in = c.in[:0]
+		c.outStack = append(c.outStack, c.inStack...)
+		c.inStack = c.inStack[:0]
 	}
-	ans = c.out[0]
-	c.out = c.out[1:]
+	ans = c.outStack[0]
+	c.outStack = c.outStack[1:]
 	return
 }
 
@@ -62,5 +63,5 @@ func main() {
 			output = append(output, ans)
 		}
 	}
-	fmt.Println("output: ", JoinArray(output))
+	fmt.Println("\noutput:", JoinArray(output))
 }
