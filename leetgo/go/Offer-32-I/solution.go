@@ -1,4 +1,4 @@
-// Created by k at 2023/06/05 16:55
+// Created by k at 2023/06/09 14:19
 // https://leetcode.cn/problems/cong-shang-dao-xia-da-yin-er-cha-shu-lcof/
 
 package main
@@ -39,5 +39,6 @@ func main() {
 	stdin := bufio.NewReader(os.Stdin)
 	root := Deserialize[*TreeNode](ReadLine(stdin))
 	ans := levelOrder(root)
-	fmt.Println("output: " + Serialize(ans))
+
+	fmt.Println("\noutput:", Serialize(ans))
 }
