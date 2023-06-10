@@ -1,13 +1,9 @@
-// Created by k at 2023/06/08 14:33
+// Created by k at 2023/06/10 21:49
 // https://leetcode.cn/problems/que-shi-de-shu-zi-lcof/
 
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-
 	. "github.com/j178/leetgo/testutils/go"
 )
 
@@ -28,11 +24,3 @@ func missingNumber(nums []int) (ans int) {
 }
 
 // @lc code=end
-
-func main() {
-	stdin := bufio.NewReader(os.Stdin)
-	nums := Deserialize[[]int](ReadLine(stdin))
-	ans := missingNumber(nums)
-
-	fmt.Println("\noutput:", Serialize(ans))
-}
