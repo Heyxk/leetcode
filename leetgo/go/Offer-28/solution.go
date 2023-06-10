@@ -1,26 +1,22 @@
-// Created by k at 2023/06/06 12:52
+// Created by k at 2023/06/10 21:41
 // https://leetcode.cn/problems/dui-cheng-de-er-cha-shu-lcof/
 
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-
 	. "github.com/j178/leetgo/testutils/go"
 )
 
 // @lc code=begin
 
-func recur(A, B *TreeNode) bool {
-	if A == nil && B == nil {
+func recur(a, b *TreeNode) bool {
+	if a == nil && b == nil {
 		return true
 	}
-	if A == nil || B == nil || A.Val != B.Val {
+	if a == nil || b == nil || a.Val != b.Val {
 		return false
 	}
-	return recur(A.Left, B.Right) && recur(A.Right, B.Left)
+	return recur(a.Left, b.Right) && recur(a.Right, b.Left)
 }
 
 func isSymmetric(root *TreeNode) bool {
@@ -31,10 +27,3 @@ func isSymmetric(root *TreeNode) bool {
 }
 
 // @lc code=end
-
-func main() {
-	stdin := bufio.NewReader(os.Stdin)
-	root := Deserialize[*TreeNode](ReadLine(stdin))
-	ans := isSymmetric(root)
-	fmt.Println("output: " + Serialize(ans))
-}
