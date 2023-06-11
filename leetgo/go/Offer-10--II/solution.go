@@ -1,13 +1,9 @@
-// Created by k at 2023/06/06 14:35
+// Created by k at 2023/06/11 16:06
 // https://leetcode.cn/problems/qing-wa-tiao-tai-jie-wen-ti-lcof/
 
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-
 	. "github.com/j178/leetgo/testutils/go"
 )
 
@@ -15,7 +11,6 @@ import (
 
 func numWays(n int) (ans int) {
 	a, b := 1, 2
-	// 起始条件和斐波拉契数列不同
 	for i := 1; i < n; i++ {
 		a, b = b, (a+b)%1000000007
 	}
@@ -23,10 +18,3 @@ func numWays(n int) (ans int) {
 }
 
 // @lc code=end
-
-func main() {
-	stdin := bufio.NewReader(os.Stdin)
-	n := Deserialize[int](ReadLine(stdin))
-	ans := numWays(n)
-	fmt.Println("output: " + Serialize(ans))
-}
