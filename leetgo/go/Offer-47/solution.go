@@ -1,46 +1,36 @@
-// Created by k at 2023/06/07 14:04
+// Created by k at 2023/06/12 10:35
 // https://leetcode.cn/problems/li-wu-de-zui-da-jie-zhi-lcof/
 
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"os"
-
 	. "github.com/j178/leetgo/testutils/go"
 )
 
 // @lc code=begin
-
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
 func maxValue(grid [][]int) (ans int) {
-	m, n := len(grid), len(grid[0])
-	max := func(a, b int) int {
-		if a > b {
-			return a
-		}
-		return b
+	// 计算第一行礼物最大价值
+	for n := 1; n < len(grid[0]); n++ {
+		grid[0][n] += grid[0][n-1]
 	}
-	for i := 1; i < m; i++ {
-		grid[i][0] += grid[i-1][0]
+	// 计算第一列礼物最大价值
+	for m := 1; m < len(grid); m++ {
+		grid[m][0] += grid[m-1][0]
 	}
-	for j := 1; j < n; j++ {
-		grid[0][j] += grid[0][j-1]
-	}
-	for i := 1; i < m; i++ {
-		for j := 1; j < n; j++ {
-			grid[i][j] += max(grid[i-1][j], grid[i][j-1])
+	// 计算能从上方和左方到达的格子最大礼物价值
+	for m := 1; m < len(grid); m++ {
+		for n := 1; n < len(grid[0]); n++ {
+			grid[m][n] = max(grid[m-1][n]+grid[m][n], grid[m][n-1]+grid[m][n])
 		}
 	}
-	return grid[m-1][n-1]
+
+	return grid[len(grid)-1][len(grid[0])-1]
 }
 
 // @lc code=end
-
-func main() {
-	stdin := bufio.NewReader(os.Stdin)
-	grid := Deserialize[[][]int](ReadLine(stdin))
-	ans := maxValue(grid)
-
-	fmt.Println("\noutput:", Serialize(ans))
-}
