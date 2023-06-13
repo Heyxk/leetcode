@@ -1,0 +1,8 @@
+input:
+8
+[4,1,8,4,5]
+[5,0,1,8,4,5]
+2
+3
+output:
+Reference of the node with value = 8
