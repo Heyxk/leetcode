@@ -1,0 +1,11 @@
+input:
+[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+"ABCCED"
+output:
+true
+
+input:
+[["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+"SEE"
+output:
+false
