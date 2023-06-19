@@ -14,27 +14,45 @@ import (
 // @lc code=begin
 
 func maxDepth(root *TreeNode) (ans int) {
+	// bfs
+	/*
+		if root == nil {
+			return 0
+		}
+		queue := []*TreeNode{root}
+
+		for len(queue) != 0 {
+			ans++
+			n := len(queue)
+			for i := 0; i < n; i++ {
+				node := queue[i]
+				if node.Left != nil {
+					queue = append(queue, node.Left)
+				}
+				if node.Right != nil {
+					queue = append(queue, node.Right)
+				}
+			}
+			queue = queue[n:]
+		}
+
+		return
+	*/
+
+	// dfs
+
 	if root == nil {
 		return 0
 	}
-	queue := []*TreeNode{root}
+	return max(maxDepth(root.Left), maxDepth(root.Right)) + 1
 
-	for len(queue) != 0 {
-		ans++
-		n := len(queue)
-		for i := 0; i < n; i++ {
-			node := queue[i]
-			if node.Left != nil {
-				queue = append(queue, node.Left)
-			}
-			if node.Right != nil {
-				queue = append(queue, node.Right)
-			}
-		}
-		queue = queue[n:]
+}
+func max(a, b int) int {
+	if a > b {
+		return a
 	}
+	return b
 
-	return
 }
 
 // @lc code=end
