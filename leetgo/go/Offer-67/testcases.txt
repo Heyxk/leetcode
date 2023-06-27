@@ -1,0 +1,24 @@
+input:
+"42"
+output:
+42
+
+input:
+"   -42"
+output:
+-42
+
+input:
+"4193 with words"
+output:
+4193
+
+input:
+" "
+output:
+0
+
+input:
+"2147483648"
+output:
+2147483647
