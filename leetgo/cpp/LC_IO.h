@@ -1,4 +1,3 @@
-// version: 1.0
 #ifndef LC_IO_H
 #define LC_IO_H
 
