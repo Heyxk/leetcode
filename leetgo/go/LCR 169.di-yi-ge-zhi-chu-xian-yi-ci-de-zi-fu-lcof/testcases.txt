@@ -1,0 +1,9 @@
+input:
+"abbccdeff"
+output:
+"a"
+
+input:
+"ccdd"
+output:
+" "
