@@ -1,0 +1,4 @@
+input:
+"a.aef.qerf.bb"
+output:
+"a aef qerf bb"
