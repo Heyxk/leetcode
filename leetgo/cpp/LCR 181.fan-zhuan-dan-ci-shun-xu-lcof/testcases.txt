@@ -1,0 +1,9 @@
+input:
+"  hello world!  "
+output:
+"world! hello"
+
+input:
+" "
+output:
+""
